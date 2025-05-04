@@ -110,3 +110,22 @@ h4 {
   grid-template-columns: repeat(3, 1fr); /* 3 items per row */
   gap: 5em;
 }
+
+@media (max-width: 768px) {
+  #tab2 .choices {
+    grid-template-columns: 1fr; /* stack vertically on small screens */
+    gap: 2em; /* reduce gap */
+  }
+
+  #tab2 div.outer {
+    width: 8em;
+    height: 8em;
+  }
+
+  #tab2 div.inner {
+    width: 5em;
+    height: 5em;
+    left: 1.5em;
+    top: 1.5em;
+  }
+}
