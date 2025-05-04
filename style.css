@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-size: 20px;
 }
 
 .tab-buttons button:hover {
@@ -25,7 +26,7 @@
     transition: opacity 0.5s ease;
     padding: 1%;
     border: 1px solid #ccc;
-    margin-top: 3%;
+    margin-top: 2%;
   }
 
   .tab-content.show {
@@ -47,26 +48,30 @@
   }
 
   #tab1 {
-    font-size: 20px;
+    font-size: 1vw;
   }
 
   h4, h2{
-    margin: 20px;
+    margin: 1em;
   }
 
   h2 {
-    font-size: 50px;
+    font-size: 2%;
   }
 
   h3 {
-    font-size: 30px;
-    margin-top: 50px;
+    font-size: 2vw;
+    margin-top: 2.5%;
   }
 
   h4 {
-    font-size: 25px;
+    font-size: 1.5em;
   }
 
   ul {
-    margin: 20px;
+    margin: 1em;
+  }
+
+  img {
+    height: 15vh;
   }
