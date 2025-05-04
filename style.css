@@ -76,3 +76,37 @@ h4 {
     height: 15vh;
   }
 }
+
+#tab2 a {
+  text-decoration: none;
+  color: black;
+}
+
+#tab2 div.outer {
+  background-color: tomato;
+  border-radius: 1em;
+  width: 10em;
+  height: 10em;
+  position: relative;
+  text-align: center;
+  transition: transform 1s ease;
+}
+
+#tab2 div.outer:hover {
+  transform: translateY(-0.3em);
+}
+#tab2 div.inner {
+  background-color: white;
+  border-radius: 1em;
+  width: 7em;
+  height: 7em;
+  position: absolute;
+  left: 1.5em;
+  top: 2em;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+  gap: 5em;
+}
