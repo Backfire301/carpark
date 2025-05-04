@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs Example</title>
+  <style>
+    .tab-buttons button {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .active-tab {
+      display: block;
+    }
+
+    .tab-buttons .active-button {
+      background-color: #ddd;
+    }
+
+    button {
+        border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tab Buttons -->
+  <div class="tab-buttons">
+    <button class="tab-btn active-button" onclick="showTab('tab1', this)">Tab 1</button>
+    <button class="tab-btn" onclick="showTab('tab2', this)">Tab 2</button>
+    <button class="tab-btn" onclick="showTab('tab3', this)">Tab 3</button>
+  </div>
+
+  <!-- Tab Contents -->
+  <div id="tab1" class="tab-content active-tab">
+    <h2>Tab 1 Content</h2>
+    <p>This is the content for Tab 1.</p>
+  </div>
+
+  <div id="tab2" class="tab-content">
+    <h2>Tab 2 Content</h2>
+    <p>This is the content for Tab 2.</p>
+  </div>
+
+  <div id="tab3" class="tab-content">
+    <h2>Tab 3 Content</h2>
+    <p>This is the content for Tab 3.</p>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function showTab(tabId, button) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active-button'));
+
+      // Show selected tab
+      document.getElementById(tabId).style.display = 'block';
+      button.classList.add('active-button');
+    }
+
+    // Initialize first tab
+    showTab('tab1', document.querySelector('.tab-btn'));
+  </script>
+
+</body>
+</html>

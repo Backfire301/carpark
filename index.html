@@ -4,12 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>car park test</title>
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
-    <a href = "https://maps.app.goo.gl/7XRXREFNaZPaR8HT9" alt = "carpark 1" target = "_blank"><button>L50</button></a>
-    <a href = "https://maps.app.goo.gl/MoEMR5f5PdisiKkE8" alt = "carpark 1" target = "_blank"><button>Arked Meranti</button></a>
+    <div id = "header">
+
+    </div>
+<!-- Tab Buttons -->
+<div class="tab-buttons">
+    <button class="tab-btn active-button" onclick="showTab('tab1', this)">手册</button>
+    <button class="tab-btn" onclick="showTab('tab2', this)">指南</button>
+  </div>
+
+  <!-- Tab Contents -->
+  <div id="tab1" class="tab-content active-tab">
+    <h2>手册</h2>
+    <h3>国际访客抵达马来西亚</h3>
+    <p>来自外国的访客</p>
+    <ul>
+        <li>建议直飞<b><a href = "https://maps.app.goo.gl/AhLpzzGyV3g1WtFq9" alt = "changiairport" target = "_blank">新加坡樟宜机场(Changi Airport)</a></b>或
+            <b><a href = "https://maps.app.goo.gl/FAFsLxDvvvFQ97WQ8" alt = "klia"  target = "_blank">吉隆坡国际机场(KLIA)</a></b>，再转乘国内交通到柔佛新山</li>
+        <li>或选择直飞柔佛州的新山士乃国际机场(Senai International Airport)，该机场距UTM更近</li>
+    </ul>
+
+    <h3>从柔佛新山国际机场到UTM</h3>
+    <p>大多数国际学生会通过<b><a href = "https://maps.app.goo.gl/1RuLHTE5Pardhq7E8" alt = "senai" target = "_blank">士乃国际机场(Senai International Airport)</a></b>抵达。从机场到UTM有以下选择：</p>
+    <h4>1. 网约车服务</h4>
+    <ul>
+        <li>建议使用Grab、Maxim、inDriver或AirAsia Ride</li>
+        <li>价格根据路况、时段及天气情况会有所不同</li>
+        <li>提前在手机上安装相关应用</li>
+    </ul>
+    <h4>2. 租车自驾</h4>
+    <ul>
+        <li>建议拥有国际驾照</li>
+    </ul>
+
+    <h3>从吉隆坡到UTM</h3>
+    <h4>1. 空中交通</h4>
+    <ul>
+        <li>从吉隆坡国际机场(KLIA)乘坐国内航班飞往士乃国际机场</li>
+    </ul>
+
+    <h4>2. 陆路交通</h4>
+    <ul>
+        <li>长途巴士</li>
+        <li>从<b><a href = "https://maps.app.goo.gl/yAZ89tm6dTTRyVGz6" target = "_blank">吉隆坡TBS(Terminal Bersepadu Selatan)</a></b>乘坐长途巴士前往<b><a href = "https://maps.app.goo.gl/rT16xw68sgQBn4o17" target = "_blank">Larkin Sentral</a></b></li>
+        <li>车程约<b>4-5小时</b>，建议提前购票</li>
+    </ul>
+
+    <h3>校内外交通服务</h3>
+    <p>1. Bas Muafakat Johor（柔佛免费巴士）</p>
+    <ul>
+        <li>这是柔佛州政府和地方政府资助的免费巴士服务</li>
+        <li>需持有Kad Muafakat Johor (KMJ)卡或本地IC卡才能使用</li>
+        <li>P211路线会进入UTM校区，经过UTM lingkaran ilmu的Centre Point以及SKE对面操场</li>
+        <li>起点是Terminal Taman U，终点是Larkin Central</li>
+        <li><b style = "color :red">注意：此服务到晚上11点后就没有到UTM校区了</b></li>
+    </ul>
+
+    <p style= "margin-top: 30px;">2. Larkin Sentral（拉欣中央车站）</p>
+    <ul>
+        <li>可通过Bas Muafakat Johor P211巴士前往UTM</li>
+        <li>需持有Kad Muafakat Johor/IC</li>
+    </ul>
+
+    <h3>电召出租车服务</h3>
+    <p>UTM学生常用的网约车服务：</p>
+    <h4>1. <a href = "https://play.google.com/store/apps/details?id=com.taxsee.taxsee" target = "_blank">Maxim</a></h4>
+    <img src = "images/maxim.png" alt = "maxim">
+    <ul>
+        <li>费用相对便宜，但出租车数量较少</li>
+        <li>可能需要较长等待时间</li>
+    </ul>
+
+    <h4>2. <a href = "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger&pcampaignid=web_share" target = "_blank">Grab</a></h4>
+    <img src = "images/grab.png" alt = "grab">
+    <ul>
+        <li>出租车数量多，但价格会有额外费用</li>
+        <li>学生可与朋友共乘减轻经济负担</li>
+    </ul>
+
+    <h4>3. <a href = "https://play.google.com/store/apps/details?id=sinet.startup.inDriver&pcampaignid=web_share" target = "_blank">inDriver</a></h4>
+    <img src = "images/indrive.png" alt = "indrive">
+    <ul>
+        <li>价格相对Grab服务费用便宜</li>
+        <li>出租车数量相对较少</li>
+    </ul>
+
+    <h4>4. <a href = "https://play.google.com/store/apps/details?id=com.airasia.mobile&pcampaignid=web_share" target = "_blank">AirAsia Ride</a></h4>
+    <img src = "images/airasia.png" alt = "airasia">
+    <ul>
+        <li>近期进入市场的电召服务</li>
+        <li>预计未来司机人数会增加</li>
+    </ul>
+
+    <h4>5. <a href = "https://play.google.com/store/apps/details?id=com.manja.kumpool&pcampaignid=web_share" target = "_blank"></a>Kummute</h4>
+    <img src = "images/kummute.png" alt = "kummute">
+    <ul>
+        <li>较新的电召车服务，价格较实惠，载送范围也比较局限</li>
+        <li>服务范围与UTM JB校区内各大巴士站、大学城以及UTM JB校区外部分区域</li>
+        <li>营业时间为早上7:30至晚上7:30（星期日至星期四）或早上8时（星期五和星期六）</li>
+        <li>在UTM JB校区内的载送费用通常是RM1至RM3不等</li>
+        <li>主要使用小型货车运载，不接受现金支付，只能使用Kumpool Wallet</li>
+    </ul>
+
+    <h3>实用应用程序</h3>
+
+    <h4><a href = "https://play.google.com/store/apps/details?id=com.manja.hugoapp&pcampaignid=web_share" target = "_blank">LUGO应用</a></h4>
+    <img src = "images/lugo.png" alt = "lugo">
+    <ul>
+        <li>一款查询附近交通的应用程序</li>
+        <li>可作为Bas Muafakat Johor个人化旅行指南</li>
+        <li>可在界面规划巴士转站路线及查询巴士实时位置和到站时间</li>
+        <li>可在App Store、Play Store及AppGallery下载</li>
+    </ul>
+
+    <h4><a href = "https://play.google.com/store/apps/details?id=com.tranzmate&pcampaignid=web_share" target = "_blank">MOOVIT 应用</a></h4>
+    <img src = "images/moovit.png" alt = "moovit">
+    <ul>
+        <li>一款全球知名的公共交通导航应用</li>
+        <li>提供实时公交信息和详细路线规划功能</li>
+        <li>支持多种语言界面，非常方便国际访客使用</li>
+        <li>可显示公交路线、站点位置和预计到达时间</li>
+        <li>部分功能可离线使用，对没有当地网络的访客很有帮助</li>
+        <li>适用于巴士、地铁、轻轨等多种公共交通方式</li>
+        <li>可在App Store和Google Play商店下载</li>
+    </ul>
+
+    <h3>注意事项</h3>
+    <h4>1. 预先准备</h4>
+    <ul>
+        <li>提前下载并注册相关交通应用</li>
+        <li>准备足够的马币现金（特别是对于刚到达的国际访客）</li>
+        <li>查询并保存重要地点的地址（如UTM校区内的比赛场地）</li>
+    </ul>
+    <h4>2. 交通卡</h4>
+    <ul>
+        <li>如计划多次使用公共交通，建议办理Kad Muafakat Johor</li>
+        <li>办理地点和详情可查询官方网站：<a href = "https://paj.com.my/kad-muafakat-johor-kmj/" target = "_blank">https://paj.com.my/kad-muafakat-johor-kmj/</a></li>
+    </ul>
+
+    <h4>3. 时间安排</h4>
+    <ul>
+        <li>考虑交通可能的延误，建议提前规划行程</li>
+        <li>特别是在高峰时段，预留足够的交通时间</li>
+    </ul>
+
+    <h4>4. 校内导航</h4>
+    <ul>
+        <li>UTM校区较大，建议使用校园地图或询问校内指引</li>
+        <li>比赛参与者可向组织方询问校内指定接送点</li>
+    </ul>
+
+    <h4>5. 紧急联系</h4>
+    <ul>
+        <li>保存当地紧急联系电话</li>
+        <li>保持与比赛组织者的联系</li>
+    </ul>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div id="tab2" class="tab-content">
+    <h2>Tab 2 Content</h2>
+    <p>This is the content for Tab 2.</p>
+  </div>
+
+
+  <!-- JavaScript -->
+  <script>
+    function showTab(tabId, button) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      // Hide all tabs
+      tabs.forEach(tab => {
+        tab.classList.remove('show', 'fade-in');
+        tab.style.display = 'none';
+      });
+
+      // Remove active button class
+      buttons.forEach(btn => btn.classList.remove('active-button'));
+
+      // Show selected tab
+      const selectedTab = document.getElementById(tabId);
+      selectedTab.style.display = 'block';
+      setTimeout(() => {
+        selectedTab.classList.add('show', 'fade-in');
+      }, 10); // small delay to allow transition to trigger
+
+      // Highlight active button
+      button.classList.add('active-button');
+    }
+
+    // Initialize first tab
+    showTab('tab1', document.querySelector('.tab-btn'));
+  </script>
 </body>
 </html>
