@@ -52,13 +52,13 @@ img {
 
 /* Headings */
 h2 {
-  font-size: 1.5em;
+  font-size: 3em;
 }
 h3 {
-  font-size: 1.2em;
+  font-size: 2em;
 }
 h4 {
-  font-size: 1em;
+  font-size: 1.5em;
 }
 
 /* Responsive font sizing */
