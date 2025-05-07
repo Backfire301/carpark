@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>美食指南</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #fffefc;
+      color: #333;
+      padding: 20px;
+      line-height: 1.6;
+      max-width: 960px;
+      margin: auto;
+      overflow-x: visible; /* 防止横向滚动条 */
+    }
+    h1 {
+      text-align: center;
+      color: #d35400;
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: #e67e22;
+      border-bottom: 2px solid #f1c40f;
+      padding-bottom: 5px;
+      margin-top: 40px;
+      margin: 30px 0 10px 20px;
+      font-size: 1.5em;
+    }
+    /* 容器样式 */
+    .container {
+      display: flex;  /* 启用弹性布局 */
+      flex-direction: row;  /* 横向排列 */
+      gap: 20px;  /* 卡片间距 */
+      padding: 20px;
+      overflow: visible;  /* 允许横向滚动 */
+      width: 100%;
+      -webkit-overflow-scrolling: touch;  /* 平滑滚动 */
+      scroll-snap-type: x mandatory;
+      margin: 0 -20px;
+      padding-left: 20px;
+      position: relative; /* 添加相对定位 */
+    }
+
+    /* 隐藏滚动条但保持功能 */
+    .container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 卡片基础样式 */
+    .card {
+      position: relative;
+      width: 300px !important;
+      min-width: 300px;  /* 防止卡片被压缩 */
+      flex-shrink: 0;  /* 防止卡片被压缩 */
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      scroll-snap-align: start;
+      z-index: 1; /* 默认层级 */
+    }
+
+    .card:hover {
+      z-index: 100; /* 悬停时提升层级 */
+    }
+
+    /* 卡片图片 */
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+
+    /* 卡片内容 */
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 8px;
+      font-size: 1.1em;
+    }
+
+    .card-content p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    /* 下拉内容基础样式 */
+    .dropdown-content {
+      display: none;  /* 默认隐藏 */
+      position: absolute;
+      left: calc(100% + 10px);
+      top: 0;
+      width: 300px;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+      z-index: 1000;
+      overflow: visible; /* 确保内容可见 */
+    }
+
+    /* 显示下拉内容 */
+    .card:hover .dropdown-content {
+      display: block;
+    }
+
+    /* 下拉内容样式 */
+    .dropdown-content h4 {
+      margin: 0 0 15px 0;
+      font-size: 1.2em;
+    }
+
+    .dropdown-content p {
+      margin: 8px 0;
+      line-height: 1.6;
+    }
+
+    .dropdown-content ul {
+      margin: 5px 0 5px 20px;
+      padding: 0;
+    }
+
+    .dropdown-content a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .tip {
+      background: linear-gradient(45deg, #fef3e7, #fff5ea);
+      padding: 20px;
+      border-radius: 12px;
+      border-left: 5px solid #f39c12;
+      margin: 40px 0;
+      box-shadow: 0 2px 10px rgba(243, 156, 18, 0.1);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .card-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-wrapper {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      height: 100%;
+      padding-left: 15px;
+      z-index: 9999;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .dropdown-content {
+        position: fixed;
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        border-radius: 20px 20px 0 0;
+      }
+      h2 + div {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .card {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    /* 创建一个隐形的连接区域 */
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 20px;
+      height: 100%;
+      background: transparent;
+    }
+    /* 确保所有卡片容器不影响卡片宽度 */
+    .container, .section, .category {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    /* 分类容器样式 */
+    h2 + div {  /* 每个标题后面的容器 */
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;  /* 卡片之间的间距 */
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📍 美食指南：人气必吃推荐清单</h1>
+
+  <h2>🍜 面食类 / 汤类</h2>
+  <div class="container">
+    <!-- 新海珍鸭肉卡片 -->
+    <div class="card">
+      <img src="images/duck.jpeg" alt="新海珍粿条仔" style="width: 100%; height: 240px; object-fit: cover;">
+      <div class="card-content">
+        <h3>新海珍鸭肉</h3>
+        <p>1983年老字号，以粿条仔和卤鸭闻名。</p>
+      </div>
+      <div class="dropdown-content">
+        <h4>🦆 新海珍鸭肉（粿条仔）</h4>
+        <p><strong>📍 地址：</strong>53, Jalan Hang Tuah 40, Kangkar Pulai, 81300 Johor Bahru</p>
+        <p><strong>📱 导航：</strong>
+            <a href="https://maps.apple.com/place?address=53,%20Jalan%20Hang%20Tuah%2040,%2081300%20Johor%20Bahru,%20Johore,%20Malaysia&coordinate=1.518647,103.652615&name=53,%20Jalan%20Hang%20Tuah%2040&map=explore" target="_blank">IOS</a> | 
+            <a href="https://maps.app.goo.gl/5pXDunc8nFazhe437?g_st=com.google.maps.preview.copy" target="_blank">Android</a>
+        </p>
+        <p><strong>⏰ 营业时间：</strong>每天 7:00am – 2:00pm</p>
+        <p><strong>🍜 主打：</strong>
+            <ul style="margin: 5px 0 5px 20px; padding: 0;">
+                <li>卤鸭胸粿条仔</li>
+                <li>猪杂粿条汤</li>
+                <li>鸭血糕粿条汤（限量）</li>
+            </ul>
+        </p>
+        <p><strong>💬 食客评价：</strong>"汤头鲜甜、鸭肉入味，粿条滑顺，吃了超过十年！"</p>
+      </div>
+    </div>
+
+    <!-- QQ 面粉粿 -->
+    <div class="card">
+      <img src="images/meehonkuah.jpeg" alt="QQ 面粉粿" style="width: 100%; height: 240px; object-fit: cover;">
+      <div class="card-content"> 
+        <h3>皇后面粉粿 QQ Mee</h3> 
+        <p>手工现做，Q 弹爽口的传统面粉粿专门店。</p> 
+      </div> 
+      <div class="dropdown-content">
+        <h4>🍜 皇后面粉粿 QQ Mee</h4> 
+        <p><strong>📍 地址：</strong>4, Jalan Nakhoda 7, Taman Ungku Tun Aminah, 81300 Johor Bahru, Johor</p> 
+        <p><strong>📱 导航：</strong> 
+          <a href="https://maps.app.goo.gl/CRAx2W4ysgoQSKby6?g_st=com.google.maps.preview.copy" target="_blank">Android</a>
+      </p>
+        <p><strong>⏰ 营业时间：</strong>每天 8:30 AM – 10:00 PM（每两个星期三休息一天）</p> 
+        <p><strong>🍲 招牌推荐：</strong>清汤面粉粿、干捞面粉粿、猪肉片/肉丸配料、自制辣椒酱</p> 
+        <p><strong>💬 特色亮点：</strong>每日手工擀制面团，口感滑嫩富弹性，汤头清甜，深受本地食客喜爱。</p> 
+      </div>
+    </div>
+
+    <!-- 螺喵喵螺狮粉 -->
+    <div class="card">
+      <img src="images/luosifen.jpg" alt="螺喵喵螺狮粉" style="width: 100%; height: 240px; object-fit: cover;">
+      <div class="card-content"> 
+        <h3>螺喵喵螺蛳粉 Luo Meow Meow</h3> 
+        <p>臭香诱人的广西风味螺蛳粉专门店，深受年轻人喜爱。</p> 
+      </div> 
+      <div class="dropdown-content">
+        <h4>🍲 螺喵喵螺蛳粉 Luo Meow Meow</h4>
+        <p><strong>📍 地址：</strong>Block A-02-41, Jalan Eko Flora 1, Eco Palladium, 81100 Johor Bahru, Johor</p> 
+        <p><strong>⏰ 营业时间：</strong><br> - 星期一至三：12:00 PM – 9:00 PM<br> - 星期四：休息<br> - 星期五至日：12:00 PM – 12:00 AM</p> 
+        <p><strong>🍲 招牌推荐：</strong>原味螺蛳粉、番茄螺蛳粉、加料版（如卤蛋、炸腐竹）、自制酸笋</p> 
+        <p><strong>💬 特色亮点：</strong>手工米线滑爽，汤底酸辣浓郁，搭配丰富配料，带来地道的广西风味。</p> 
+      </div>
+    </div>
+  </div>
+
+  <h2>🍛 马来/娘惹风味</h2>
+  <div class="card noodle">
+      <img src="images/rasasayang.jpg" alt="面食图片">
+      <div class="card-content">
+        <h3>面食店名</h3>
+        <p>面食描述</p>
+      </div>
+      <div class="dropdown-content">
+        <h4>🍛 Rasa Sayang Restaurant</h4>
+        <p>提供经典马来餐与娘惹佳肴。</p>
+        <p>推荐：Nasi Lemak、阿叁叻沙、娘惹糕点。</p>
+        <p>适合家庭聚餐或节庆聚会。</p>
+      </div>
+  </div>
+
+  <h2>☕ 南洋风味</h2>
+  <div class="card">
+      <img src="images/roast.jpg" alt="Roast and Coffee">
+      <div class="card-content"> 
+        <h3>Roast & Coffee</h3> 
+        <p>现代复古风南洋咖啡馆，主打传统早餐与创意饮品。</p> 
+      </div> 
+      <div class="dropdown-content">
+        <h4>☕ Roast & Coffee – Retro Garden 1968's</h4> 
+        <p><strong>📍 地址：</strong>Jalan Tan Hiok Nee, Johor Bahru</p> 
+        <p><strong>⏰ 营业时间：</strong>每天 7:00am – 5:00pm</p> 
+        <p><strong>🍜 主打：</strong>海南三宝早餐、咸蛋法式吐司、仁当鸡椰浆饭、古油咖啡</p> 
+        <p><strong>💬 食客评价：</strong>"复古环境配上香浓咖啡和传统美食，打卡又好吃！"</p> 
+      </div>
+  </div>
+
+  <h2>🍢 清真 / 中东风味</h2>
+  <div class="card">
+      <img src="images/alsafa.jpg" alt="Al Safa">
+      <div class="card-content"> 
+        <h3>Restoran Al-Safa</h3> 
+        <p>马来西亚连锁清真餐厅，融合印度与马来风味。</p> 
+      </div> 
+      <div class="dropdown-content">
+        <h4>🍛 Restoran Al-Safa（Nasi Kandar & Roti）</h4> 
+        <p><strong>📍 地址：</strong>Bandar Seri Alam & 多家分店，Johor Bahru</p> 
+        <p><strong>⏰ 营业时间：</strong>部分分店 24小时营业</p> 
+        <p><strong>🍜 主打：</strong>Nasi Kandar、Roti Canai、Thosai、Murtabak、Briyani</p> 
+        <p><strong>💬 食客评价：</strong>"选择多样、咖喱浓郁，是深夜宵夜首选！"</p> 
+      </div>
+  </div>
+
+  <div class="tip">
+    ✅ 小贴士：<br>
+    - 建议错峰用餐，热门时段可能需要排队<br>
+    - 多数地点适合打卡拍照📷<br>
+    - 可提前查看 Google 或小红书评论避免踩雷
+  </div>
+</body>
+</html>
