@@ -218,9 +218,40 @@
       gap: 20px;  /* 卡片之间的间距 */
       margin-bottom: 30px;
     }
+    /* 添加返回按钮样式 */
+    .back-button {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .back-button::before {
+        content: '←';
+        font-size: 20px;
+    }
   </style>
 </head>
 <body>
+  <a href="index.html" class="back-button">返回首页</a>
   <h1>📍 美食指南：人气必吃推荐清单</h1>
 
   <h2>🍜 面食类 / 汤类</h2>
