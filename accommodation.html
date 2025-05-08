@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>🏫 住宿指南</title>
+  <style>
+    /* 全局样式优化 */
+    body {
+      font-family: "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
+      color: #2c3e50;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3em 2em;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 标题样式优化 */
+    h1 {
+      text-align: center;
+      font-size: 3em;
+      margin-bottom: 1.8em;
+      background: linear-gradient(45deg, #2c3e50, #3498db, #2980b9);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 2px 2px 4px rgba(52,152,219,0.1); }
+      50% { text-shadow: 2px 2px 8px rgba(52,152,219,0.3); }
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(45deg, #2c3e50, #3498db);
+      border-radius: 2px;
+      animation: lineWidth 3s ease-in-out infinite;
+    }
+
+    @keyframes lineWidth {
+      0%, 100% { width: 120px; }
+      50% { width: 140px; }
+    }
+
+    /* 二级标题样式优化 */
+    h2 {
+      color: #2c3e50;
+      font-size: 2em;
+      margin-top: 2em;
+      padding: 15px 25px;
+      border-left: 5px solid #3498db;
+      background: linear-gradient(to right, rgba(52,152,219,0.1), transparent);
+      border-radius: 0 10px 10px 0;
+      transition: all 0.3s ease;
+    }
+
+    h2:hover {
+      transform: translateX(10px);
+      background: linear-gradient(to right, rgba(52,152,219,0.2), transparent);
+    }
+
+    /* 表格样式优化 */
+    .hotel-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 2em 0;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 
+        0 10px 30px rgba(0,0,0,0.08),
+        0 1px 3px rgba(0,0,0,0.03);
+      backdrop-filter: blur(10px);
+    }
+
+    .hotel-table th {
+      background: linear-gradient(45deg, #3498db, #2980b9);
+      color: white;
+      font-weight: 500;
+      padding: 20px;
+      font-size: 1.1em;
+    }
+
+    .hotel-table td {
+      padding: 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .hotel-table tr:hover td {
+      background: rgba(52,152,219,0.05);
+      transform: scale(1.01);
+    }
+
+    /* 列表项样式优化 */
+    ul li {
+      margin-bottom: 1.5em;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.05),
+        0 1px 3px rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    ul li:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 
+        0 15px 35px rgba(52,152,219,0.1),
+        0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* 链接样式优化 */
+    a {
+      color: #3498db;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    a:hover {
+      color: #2980b9;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* 返回按钮样式优化 */
+    .back-button {
+      position: fixed;
+      top: 30px;
+      left: 30px;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50px;
+      box-shadow: 
+        0 5px 15px rgba(0,0,0,0.08),
+        0 1px 3px rgba(0,0,0,0.05);
+      color: #3498db;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.7);
+      z-index: 1000;
+    }
+
+    .back-button:hover {
+      transform: translateX(-8px);
+      background: linear-gradient(45deg, #3498db, #2980b9);
+      color: white;
+      box-shadow: 
+        0 8px 25px rgba(52,152,219,0.2),
+        0 1px 3px rgba(52,152,219,0.1);
+    }
+
+    .back-button::after {
+      display: none;
+    }
+
+    /* 高亮文本样式优化 */
+    .highlight {
+      color: #3498db;
+      font-weight: 600;
+      font-size: 1.1em;
+      background: linear-gradient(120deg, rgba(52,152,219,0.2) 0%, rgba(52,152,219,0.1) 100%);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* 响应式优化 */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5em;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+        padding: 12px 20px;
+      }
+
+      .hotel-table {
+        font-size: 0.9em;
+      }
+
+      .back-button {
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🏫 住宿指南</h1>
+
+  <h2>🏫 校内住宿（UTM宿舍）</h2>
+  <p>UTM提供多种校内住宿，适合学生和访客：</p>
+  <ul>
+    <li><span class="highlight">Scholar's Inn UTM</span>
+      <ul>
+        <li>价格：标准房 RM140 起，套房 RM270 起</li>
+        <li>设施：空调、电视、早餐、网络等</li>
+        <li>位置：位于UTM校园内，步行可达主要设施</li>
+        <li>预订：
+          <ul>
+            <li><a href="https://dvcdev.utm.my/scholars-inn/">https://dvcdev.utm.my/scholars-inn/</a></li>
+            <li><a href="https://humanities.utm.my/tvetic2023/hotels/?utm_source=chatgpt.com">https://humanities.utm.my/tvetic2023/hotels/</a></li>
+            <li><a href="http://5dvcdev.utm.my">http://5dvcdev.utm.my</a></li>
+            <li><a href="https://admission.utm.my/accommodation/?utm_source=chatgpt.com">https://admission.utm.my/accommodation/</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>🏨 附近酒店推荐（离UTM 2–10 公里）</h2>
+  <table class="hotel-table">
+    <tr><th>酒店名称</th><th>价格（每晚）</th><th>距离UTM</th><th>预订链接</th></tr>
+    <tr><td>Pulai Springs Resort</td><td>RM324.71</td><td>2.5 km</td><td><a href="https://www.traveloka.com/en-my/hotel/malaysia/pulai-springs-resort-1000000384450">查看</a></td></tr>
+    <tr><td>GoodHope Hotel Skudai</td><td>RM63.90</td><td>5.3 km</td><td><a href="https://www.traveloka.com/en-my/hotel/malaysia/goodhope-hotel-skudai-1000000414600">查看</a></td></tr>
+    <tr><td>Bzz Hotel Skudai</td><td>RM121.42</td><td>4.8 km</td><td><a href="https://www.traveloka.com/en-my/hotel/malaysia/bzz-hotel-1000000414601">查看</a></td></tr>
+    <tr><td>HereHotel Skudai</td><td>RM45.03</td><td>6.8 km</td><td><a href="https://www.traveloka.com/en-my/hotel/malaysia/herehotel-1000000414602">查看</a></td></tr>
+    <tr><td>I Harmony Hotel</td><td>RM109.29</td><td>2.5 km</td><td><a href="https://www.traveloka.com/en-my/hotel/malaysia/i-harmony-hotel-1000000414603">查看</a></td></tr>
+  </table>
+
+  <h2>🏡 民宿推荐（适合家庭或团体）</h2>
+  <ul>
+    <li><span class="highlight">S Homestay Taman Universiti</span>
+      <ul>
+        <li>价格：RM200/晚（普通日），RM250/晚（毕业典礼期间）</li>
+        <li>房型：3房1厅（2双人床+1单人床）</li>
+        <li>设施：空调、厨房、电视、冰箱等</li>
+        <li>位置：距UTM约5分钟车程</li>
+        <li>预订：
+          <ul>
+            <li><a href="https://www.mudah.my/s-homestay-taman-universiti-skudai-near-utm-108386513.htm">Mudah.my 链接</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="highlight">Adam Homestay Skudai</span>
+      <ul>
+        <li>价格：RM280/晚</li>
+        <li>房型：3房2卫，适合6–8人</li>
+        <li>设施：空调、洗衣机、厨房、停车位等</li>
+        <li>位置：距UTM约3.6 km</li>
+        <li>预订：<a href="https://adamhomestay.com/homestay-skudai/">官网链接</a></li>
+      </ul>
+    </li>
+    <li><span class="highlight">Homestay Budget Bestari</span>
+      <ul>
+        <li>价格：约RM200–250/晚</li>
+        <li>房型：2房2卫，最多可容纳6位成人和4位儿童</li>
+        <li>设施：空调、厨房、洗衣机、网络等</li>
+        <li>位置：距UTM约7 km</li>
+        <li>预订：<a href="https://www.stayz.com.au/holiday-rental/p4289955">Stayz 链接</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>📌 小贴士</h2>
+  <ul>
+    <li>预算型选择：HereHotel 和 GoodHope Hotel 提供经济实惠的住宿，适合预算有限的旅客。</li>
+    <li>舒适型选择：Pulai Springs Resort 提供高品质的设施，适合寻求舒适体验的旅客。</li>
+    <li>家庭或团体：Adam Homestay 和 Homestay Budget Bestari 提供宽敞的空间和家庭友好的设施，适合家庭或团体入住。</li>
+  </ul>
+
+  <a href="javascript:history.back()" class="back-button">← 返回</a>
+
+</body>
+</html>
